@@ -1,0 +1,30 @@
+vi repicationcontroller.yml
+
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: myreplicas
+spec:
+  replicas: 2
+  selector:
+    myname: akshat
+  template:
+    metadata:
+      name: testpod2
+      labels:
+        myname: akshat
+    spec:
+      containers:
+        - name: c00
+          image: ubuntu
+          command: ["/bin/bash", "-c", "while true; do echo Hiiiii; sleep 2; done"]
+
+
+
+
+kubectl apply -f repicationcontroller.yml
+
+
+kubectl get pods
+
+kubectl get rs

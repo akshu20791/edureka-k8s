@@ -1,0 +1,30 @@
+vi podlabel.yml
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testlabelpod
+  labels:
+    env: dev
+    name: AG
+spec:
+  containers:
+    - name: c00
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Welcome; sleep 50; done"]
+
+
+
+
+ kubectl apply -f podlabel.yml
+ kubectl get pods
+ kubectl get pods -o wide
+ kubectl get pods --show-labels
+ kubectl label pods multiconpod env=prod
+ kubectl get pods --show-labels
+ kubectl label pods multiconpod env=test  #error will come in this ..it will ask to overwrite
+ kubectl label pods multiconpod env=test --overwrite
+ kubectl get pods --show-labels
+ kubectl get pods -l env=test
+ kubectl get pods -l name=AG
+ kubectl get pods -l env=dev                                                                                     

@@ -1,0 +1,39 @@
+Namespace notes
+
+vi devns.yml
+==============================NAMESPACES===================================
+apiVersion: v1
+kind: Namespace
+metadata:
+   name: dev
+  
+
+kubectl apply -f devns.yml
+kubectl get namespace
+
+=================================to create a pod=================
+vi pod.yml
+
+
+kind: Pod                              
+apiVersion: v1                     
+metadata:                           
+  name: testpod                  
+spec:                                    
+  containers:                      
+    - name: c00                     
+      image: ubuntu              
+      command: ["/bin/bash", "-c", "while true; do echo Akshat Gupta; sleep 5 ; done"]
+  restartPolicy: Never 
+
+kubectl apply -f pod1.yml -n dev
+kubectl get pods
+kubectl get pods -n dev
+kubectl delete -f pod1.yml
+(o/p : error)
+kubectl delete -f pod1.yml -n dev
+kubectl apply -f pod1.yml -n dev
+kubectl get pods
+(o/p : no resource found)
+kubectl config set-context $(kubectl config current-context) --namespace=dev   
+kubectl get pods
